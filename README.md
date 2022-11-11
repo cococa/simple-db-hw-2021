@@ -226,3 +226,13 @@ Their contact information can be found on the [course homepage](http://db.csail.
 [resources]: https://help.github.com/articles/what-are-other-good-resources-for-learning-git-and-github
 
 [ssh-key]: https://help.github.com/articles/generating-ssh-keys
+
+
+
+
+```aidl
+# Lab1 
+/Users/shenjun/Documents/apache-ant-1.9.16/bin/ant  runtest -Dtest=TupleTest
+
+
+```
