@@ -33,6 +33,22 @@ public class TupleDesc implements Serializable {
             this.fieldType = t;
         }
 
+
+        @Override
+        public boolean equals(Object o) {
+            if (o == null) {
+                return false;
+            }
+            if (o instanceof TDItem) {
+                TDItem other = (TDItem) o;
+                if (Objects.equals(other.fieldName, this.fieldName) && Objects.equals(other.fieldType, this.fieldType)) {
+                    return true;
+                }
+                return true;
+            }
+            return false;
+        }
+
         public String toString() {
             return fieldName + "(" + fieldType + ")";
         }
@@ -130,9 +146,13 @@ public class TupleDesc implements Serializable {
     public int fieldNameToIndex(String name) throws NoSuchElementException {
         int index = -1;
         for (int i = 0; i < mList.size(); i++) {
-            if (name.equals(mList.get(i).fieldName)) {
+            if (name != null && name.equals(mList.get(i).fieldName)) {
                 index = i;
             }
+        }
+        if (index == -1) {
+            // todo
+            throw new NoSuchElementException("");
         }
         return index;
     }
@@ -218,10 +238,9 @@ public class TupleDesc implements Serializable {
         return false;
     }
 
+
     public int hashCode() {
-        // If you want to use TupleDesc as keys for HashMap, implement this so
-        // that equal objects have equals hashCode() results
-        throw new UnsupportedOperationException("unimplemented");
+        return mList.hashCode();
     }
 
     /**

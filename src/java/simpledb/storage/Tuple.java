@@ -1,8 +1,7 @@
 package simpledb.storage;
 
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.Iterator;
+import java.util.*;
 
 /**
  * Tuple maintains information about the contents of a tuple. Tuples have a
@@ -13,6 +12,9 @@ public class Tuple implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private TupleDesc tupleDesc;
+
+    private  RecordId recordId;
     /**
      * Create a new tuple with the specified schema (type).
      *
@@ -21,15 +23,14 @@ public class Tuple implements Serializable {
      *            instance with at least one field.
      */
     public Tuple(TupleDesc td) {
-        // some code goes here
+        this.tupleDesc = td;
     }
 
     /**
      * @return The TupleDesc representing the schema of this tuple.
      */
     public TupleDesc getTupleDesc() {
-        // some code goes here
-        return null;
+        return this.tupleDesc;
     }
 
     /**
@@ -37,8 +38,7 @@ public class Tuple implements Serializable {
      *         be null.
      */
     public RecordId getRecordId() {
-        // some code goes here
-        return null;
+        return this.recordId;
     }
 
     /**
@@ -48,9 +48,12 @@ public class Tuple implements Serializable {
      *            the new RecordId for this tuple.
      */
     public void setRecordId(RecordId rid) {
-        // some code goes here
+        this.recordId = rid;
     }
 
+
+//    private Map<Integer,Field> map = new HashMap<>();
+    private List<Field> list = new ArrayList<>();
     /**
      * Change the value of the ith field of this tuple.
      *
@@ -60,7 +63,10 @@ public class Tuple implements Serializable {
      *            new value for the field.
      */
     public void setField(int i, Field f) {
-        // some code goes here
+        if(tupleDesc.getFieldType(i) != f.getType()){
+            throw  new UnsupportedOperationException("file type is "+ tupleDesc.getFieldType(i).name());
+        }
+        list.add(i,f);
     }
 
     /**
@@ -70,8 +76,7 @@ public class Tuple implements Serializable {
      *            field index to return. Must be a valid index.
      */
     public Field getField(int i) {
-        // some code goes here
-        return null;
+        return list.get(i);
     }
 
     /**

@@ -31,6 +31,10 @@ public class TupleTest extends SimpleDbTestBase {
 
         assertEquals(new IntField(1), tup.getField(0));
         assertEquals(new IntField(37), tup.getField(1));
+
+        // 自己增加的test, 测试 field 类型 和 TupleDesc 类型校验
+        tup.setField(0, new IntField(1));
+        tup.setField(1, new StringField("111", 78));
     }
 
     /**
