@@ -11,7 +11,6 @@ import java.util.*;
 public class Tuple implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
     private TupleDesc tupleDesc;
 
     private RecordId recordId;
