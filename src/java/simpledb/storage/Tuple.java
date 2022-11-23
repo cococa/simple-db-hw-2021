@@ -16,6 +16,8 @@ public class Tuple implements Serializable {
 
     private RecordId recordId;
 
+    private List<Field> fields = null;
+
     /**
      * Create a new tuple with the specified schema (type).
      *
@@ -56,8 +58,6 @@ public class Tuple implements Serializable {
     }
 
 
-    //    private Map<Integer,Field> map = new HashMap<>();
-    private List<Field> fields = null;
 
     /**
      * Change the value of the ith field of this tuple.
