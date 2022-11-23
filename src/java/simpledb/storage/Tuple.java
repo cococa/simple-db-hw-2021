@@ -23,7 +23,12 @@ public class Tuple implements Serializable {
      *           instance with at least one field.
      */
     public Tuple(TupleDesc td) {
+        if (td == null || td.numFields() == 0) {
+            throw new NullPointerException("TupleDesc has no fileds!");
+        }
         this.tupleDesc = td;
+        int size = tupleDesc.numFields() < 10 ? 10 : tupleDesc.numFields();
+        this.fields = new ArrayList<>(size);
     }
 
     /**
@@ -52,7 +57,7 @@ public class Tuple implements Serializable {
 
 
     //    private Map<Integer,Field> map = new HashMap<>();
-    private List<Field> fields = new ArrayList<>();
+    private List<Field> fields = null;
 
     /**
      * Change the value of the ith field of this tuple.
@@ -101,6 +106,8 @@ public class Tuple implements Serializable {
      * reset the TupleDesc of this tuple (only affecting the TupleDesc)
      */
     public void resetTupleDesc(TupleDesc td) {
-        // some code goes here
+        this.tupleDesc = td;
+        int size = tupleDesc.numFields() < 10 ? 10 : tupleDesc.numFields();
+        this.fields = new ArrayList<>(size);
     }
 }
